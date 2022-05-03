@@ -88,12 +88,6 @@ public class PersistentTransactionDAO implements TransactionDAO {
 
         try{
             while(cursor.moveToNext()){
-//                System.out.println(cursor.getString(0));
-//                System.out.println(cursor.getString(1));
-//                System.out.println(cursor.getString(2));
-//                System.out.println(cursor.getString(3));
-//                System.out.println(cursor.getString(4));
-                System.out.println(cursor.getString(cursor.getColumnIndex(TRANSACTION_KEY_DATE)));
                 transactions.add(new Transaction(
                         sdf.parse(cursor.getString(cursor.getColumnIndex(TRANSACTION_KEY_DATE))),
                         cursor.getString(cursor.getColumnIndex(TRANSACTION_KEY_ACCOUNT_NO)),
