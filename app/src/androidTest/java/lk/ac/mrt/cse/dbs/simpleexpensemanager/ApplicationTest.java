@@ -57,6 +57,7 @@ public class ApplicationTest {
     public static void setExpenseManager() {
         context = ApplicationProvider.getApplicationContext();
         expenseManager = new PersistentExpenseManager(context);
+        expenseManager.addAccount(TEST_ACCOUNT_NO, TEST_BANK_ACCOUNT_NAME, TEST_ACCOUNT_HOLDER_NAME, TEST_ACCOUNT_BALANCE);
     }
 
     @Test
@@ -71,9 +72,7 @@ public class ApplicationTest {
 
     @Test
     public void addAccount() {
-        expenseManager.addAccount(TEST_ACCOUNT_NO, TEST_BANK_ACCOUNT_NAME, TEST_ACCOUNT_HOLDER_NAME, TEST_ACCOUNT_BALANCE);
         assertTrue(expenseManager.getAccountNumbersList().contains(TEST_ACCOUNT_NO));
-
     }
 
     @Test
@@ -85,6 +84,7 @@ public class ApplicationTest {
             expenseManager.updateAccountBalance(TEST_ACCOUNT_NO, TEST_DAY, TEST_MONTH, TEST_YEAR, TEST_EXPENSE_TYPE, TEST_AMOUNT);
 
         } catch (InvalidAccountException e) {
+            e.printStackTrace();
             fail();
         }
         int endLogsCount = expenseManager.getTransactionLogs().size();
