@@ -41,8 +41,12 @@ public class PersistentAccountDAO implements AccountDAO {
             return accountNumbers;
 
         System.out.println("account list ids");
-        while (cursor.moveToNext()) {
-            accountNumbers.add(cursor.getString(cursor.getColumnIndex(ACCOUNT_KEY_ACCOUNT_NO)));
+        try{
+            while (cursor.moveToNext()) {
+                accountNumbers.add(cursor.getString(cursor.getColumnIndexOrThrow(ACCOUNT_KEY_ACCOUNT_NO)));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return accountNumbers;
     }
